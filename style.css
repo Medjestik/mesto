@@ -1,0 +1,24 @@
+.page {
+    margin: 0 auto;
+    min-width: 320px;
+    max-width: 1200px;
+    height: 100vh;
+    background-color: #000000;
+}
+.main {
+    margin: 0 auto;
+    max-width: 882px;
+}
+.header {
+    margin: 0px;
+}
+.header__logo {
+    margin: 45px 0px 41px 0px;
+    width: 142px;
+    height: 33.5px;
+}
+.header__line {
+    margin: 0px;
+    border-bottom: 1px solid#545454;
+    opacity: .7;
+}
