@@ -21,4 +21,4 @@
 4. Добавить возможность ставить "Like" карточкам.
 
 ## Ссылка на проект 
-[]
+[https://medjestik.github.io/mesto/index.html]
