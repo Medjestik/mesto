@@ -1,0 +1,7 @@
+.place__card {
+    margin: 0px;
+    max-width: 282px;
+    background-color: #ffffff;
+    height: 361px;
+    border-radius: 10px;
+}
