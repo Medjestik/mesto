@@ -5,15 +5,22 @@ const submitButton = document.querySelector('.popup__submit-button');
 // Находим форму в DOM
 const formElement = document.querySelector('.popup__container');
 // Находим поля формы в DOM
-const nameInput = document.querySelector('.popup__input_type_name');
-const jobInput = document.querySelector('.popup__input_type_job');
+let nameInput = document.querySelector('.popup__input_type_name');
+let jobInput = document.querySelector('.popup__input_type_job');
 // Получите значение полей из свойства value
 let profileName = document.querySelector('.profile__title');
 let profileJob = document.querySelector('.profile__subtitle');
 // Выберите элементы, куда должны быть вставлены значения полей
 
 function popupOpened () {
-    popup.classList.toggle('popup_opened');
+    if (popup.classList.contains('popup_opened')) {
+        popup.classList.remove('popup_opened');
+    }
+    else {
+        popup.classList.add('popup_opened');
+        nameInput.value = profileName.textContent;
+        jobInput.value = profileJob.textContent;
+    }
 }
 function formSubmitHandler (evt) {
     evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.

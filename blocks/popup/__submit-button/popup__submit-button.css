@@ -2,7 +2,7 @@
     display: block;
     margin: 48px 0px 0px 36px;
     width: 358px;
-    height: 50px;
+    padding: 16px 0px;
     background-color: #000000;
     border-radius: 2px;
     font-size: 18px;
@@ -22,8 +22,8 @@
 @media all and (max-width: 600px) {
     .popup__submit-button { 
         display: block;
-        margin: 48px 0px 0px 14px;
-        width: 212px;
-        height: 35px;
+        margin: 48px auto 0px auto;
+        width: 85%;
+        padding: 7px 0px;
     }
 };

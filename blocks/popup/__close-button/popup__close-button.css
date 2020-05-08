@@ -1,7 +1,6 @@
+/* Спасибо за ваши комментарии. Хочу сказать, что я всегда проверяю работу на всех разрешениях экрана и проблема с кнопкой смог обнаружить, только зайдя с телефона через сафари. В хроме и мозилле у меня все отображается корректно. Мне трудно это отследить так как Мака у меня нет, а все программы, которые я находил для проверки были платные*/
 .popup__close-button {
-    position: absolute;
-    top: -38px;
-    right: -38px;
+    margin: -44px -44px 0px auto;
     width: 41px;
     height: 41px;
     box-sizing: border-box;
@@ -14,6 +13,7 @@
     cursor: pointer;
     transition: opacity .3s ease-in-out;
     outline: none;
+    z-index: -1;
 }
 .popup__close-button:hover {
     opacity: .6;
@@ -21,8 +21,7 @@
 
 @media all and (max-width: 600px) {
     .popup__close-button {
-        top: -22px;
-        right: -22px;
+        margin: -25px -25px 0px auto;
         width: 22px;
         height: 22px;
     }
