@@ -4,7 +4,7 @@
     height: 19px;
     box-sizing: border-box;
     border: none;
-    background-color: #ffffff;
+    background-color: transparent;
     background-image: url(../../../images/like-button.svg);
     background-repeat: no-repeat;
     background-position: center;

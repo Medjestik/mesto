@@ -6,7 +6,7 @@
     box-sizing: border-box;
     border: 2px solid #ffffff;
     align-self: center;
-    background-color: #000000;
+    background-color: transparent;
     background-image: url(../../../images/add-button.svg);
     background-repeat: no-repeat;
     background-position: center;
