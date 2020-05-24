@@ -4,6 +4,7 @@
 @import url(__img/place__img.css);
 @import url(__info/place__info.css);
 @import url(__like-button/place__like-button.css);
+@import url(__delete-button/place__delete-button.css);
 
 .places {
     margin: 0px;
