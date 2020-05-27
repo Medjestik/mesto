@@ -40,16 +40,16 @@ function newCard(name, link) {
     cardEl.querySelector('.place__delete-button').addEventListener('click', function(evt) {
         evt.target.closest('.place__card').remove();
     });
-    renderCard(cardEl);
+    return cardEl;
 };
 
-function renderCard(el) {
-    cardContainer.prepend(el);
+function renderCard(cont, el) {
+    cont.prepend(el);
 }
 
 //добавляем карточки из массива в другом скрипте
 initialCards.forEach(function(el) {
-    newCard(el.name, el.link);
+    renderCard(cardContainer, newCard(el.name, el.link));
 });
 
 function openPopup(el) {
@@ -83,7 +83,7 @@ function formProfileHandler(evt) {
 
 function formCardsHandler(evt) {
     evt.preventDefault();
-    newCard(titleInput.value, linkInput.value);
+    renderCard(cardContainer, newCard(titleInput.value, linkInput.value));
 };
 
 //Слушатели
