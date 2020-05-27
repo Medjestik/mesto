@@ -19,7 +19,7 @@
     opacity: .6;
 }
 
-@media all and (max-width: 768px) {
+@media all and (max-width: 820px) {
     .profile__add-button {
         margin-left: auto;
         width: 50px;

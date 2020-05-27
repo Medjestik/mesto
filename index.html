@@ -29,51 +29,54 @@
                 </ul>
             </section>
 
-            <section class="popup popup__profile">
-                <form class="popup__container popup__container_type_profile" action="#">
-                    <button class="popup__close-button" type="button" id="popup__profile_type_close-button"></button>
-                    <h2 class="popup__title">Редактировать профиль</h2>
-                    <input class="popup__input" type="text" id="popup__input_type_name" name="name">
-                    <input class="popup__input" type="text" id="popup__input_type_job" name="job">
-                    <button class="popup__submit-button" type="submit" id="popup__profile_type_submit-button">Сохранить</button>
-                </form>
-            </section>
-
-            <section class="popup popup__cards">
-                <form class="popup__container popup__container_type_cards" action="#">
-                    <button class="popup__close-button" type="button" id="popup__cards_type_close-button"></button>
-                    <h2 class="popup__title">Новое место</h2>
-                    <input class="popup__input" type="text" id="popup__input_type_title" name="name" placeholder="Название">
-                    <input class="popup__input" type="text" id="popup__input_type_link" name="job" placeholder="Ссылка на картинку">
-                    <button class="popup__submit-button" type="submit" id="popup__cards_type_submit-button">Сохранить</button>
-                </form>
-            </section>
-
-            <section class="popup popup__photo">
-                <figure class="popup__photo-container">
-                    <button class="popup__close-button" type="button" id="popup__photo_type_close-button"></button>
-                    <img class="popup__img" alt="картинка не загрузилась =(">
-                    <figcaption class="popup__caption"></figcaption>
-                </figure>
-            </section>
-
             <footer class="footer">
                 <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
             </footer>
         </main>
     </div>
         
-    <template id="place__template">
+    <template class="place__template">
         <li class="place__card">
             <img class="place__img" alt="картинка не загрузилась =(">
-            <button class="place__delete-button" id = "delete-button" type="button"></button>
+            <button class="place__delete-button" type="button"></button>
             <div class="place__info">
                 <p class="place__caption"></p>
                 <button class="place__like-button" type="button"></button>
             </div>
         </li>
     </template> 
-       
+
+    <section class="popups">
+        <div class="popup popup__profile">
+            <form class="popup__container popup__container_type_profile" action="#">
+                <button class="popup__close-button popup__profile_type_close-button" type="button"></button>
+                <h2 class="popup__title">Редактировать профиль</h2>
+                <input class="popup__input popup__input_type_name" type="text" id="name" name="name">
+                <input class="popup__input popup__input_type_job" type="text" id="job" name="job">
+                <button class="popup__submit-button popup__profile_type_submit-button" type="submit">Сохранить</button>
+            </form>
+        </div>
+
+        <div class="popup popup__cards">
+            <form class="popup__container popup__container_type_cards" action="#">
+                <button class="popup__close-button popup__cards_type_close-button" type="button"></button>
+                <h2 class="popup__title">Новое место</h2>
+                <input class="popup__input popup__input_type_title" type="text" id="title" name="name" placeholder="Название">
+                <input class="popup__input popup__input_type_link" type="text" id="link" name="job" placeholder="Ссылка на картинку">
+                <button class="popup__submit-button popup__cards_type_submit-button" type="submit">Сохранить</button>
+            </form>
+        </div>
+
+        <div class="popup popup__photo">
+            <figure class="popup__photo-container">
+                <button class="popup__close-button popup__photo_type_close-button" type="button"></button>
+                <img class="popup__img" alt="картинка не загрузилась =(">
+                <figcaption class="popup__caption"></figcaption>
+            </figure>
+        </div>
+    </section>
+    
+    <script src="scripts/cards.js"></script>   
     <script src="scripts/script.js"></script>   
 </body>
 </html>

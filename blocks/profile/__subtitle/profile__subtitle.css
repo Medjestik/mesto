@@ -4,14 +4,16 @@
     font-style: normal;
     font-weight: normal;
     font-size: 18px;
-    line-height: 22px;
+    max-width: 350px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 @media all and (max-width: 600px) {
     .profile__subtitle {
-        margin: 0px;
-        font-size: 14px;
-        line-height: 27px;
-        text-align: center;
+        margin: 10px auto 0px;
+        padding: 0px;
+        font-size: 14px; 
     }
 };
