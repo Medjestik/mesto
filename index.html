@@ -48,27 +48,39 @@
 
     <section class="popups">
         <div class="popup popup__profile">
-            <form class="popup__container popup__container_type_profile" action="#">
+            <form class="popup__container container popup__container_type_profile" action="#">
                 <button class="popup__close-button popup__profile_type_close-button" type="button"></button>
                 <h2 class="popup__title">Редактировать профиль</h2>
-                <input class="popup__input popup__input_type_name" type="text" id="name" name="name">
-                <input class="popup__input popup__input_type_job" type="text" id="job" name="job">
+                <label class="popup__field">
+                    <input class="popup__input popup__input_type_name" type="text" id="name" name="name" minlength="2" maxlength="40" required pattern="[A-Za-zА-Яа-яЁё -]{1,}">
+                    <span class="popup__input-error" id="name-error"></span>
+                </label>
+                <label class="popup__field">
+                    <input class="popup__input popup__input_type_job" type="text" id="job" name="job" minlength="2" maxlength="200" required>
+                    <span class="popup__input-error" id="job-error"></span>
+                </label>
                 <button class="popup__submit-button popup__profile_type_submit-button" type="submit">Сохранить</button>
             </form>
         </div>
 
         <div class="popup popup__cards">
-            <form class="popup__container popup__container_type_cards" action="#">
+            <form class="popup__container container popup__container_type_cards" action="#" novalidate>
                 <button class="popup__close-button popup__cards_type_close-button" type="button"></button>
                 <h2 class="popup__title">Новое место</h2>
-                <input class="popup__input popup__input_type_title" type="text" id="title" name="name" placeholder="Название">
-                <input class="popup__input popup__input_type_link" type="text" id="link" name="job" placeholder="Ссылка на картинку">
+                <label class="popup__field">
+                    <input class="popup__input popup__input_type_title" type="text" id="title" name="name" placeholder="Название" minlength="1" maxlength="30" required>
+                    <span class="popup__input-error" id="title-error"></span>
+                </label>
+                <label class="popup__field">
+                    <input class="popup__input popup__input_type_link" type="url" id="link" name="job" placeholder="Ссылка на картинку" required>
+                    <span class="popup__input-error" id="link-error"></span>
+                </label>
                 <button class="popup__submit-button popup__cards_type_submit-button" type="submit">Сохранить</button>
             </form>
         </div>
 
         <div class="popup popup__photo">
-            <figure class="popup__photo-container">
+            <figure class="popup__photo-container container">
                 <button class="popup__close-button popup__photo_type_close-button" type="button"></button>
                 <img class="popup__img" alt="картинка не загрузилась =(">
                 <figcaption class="popup__caption"></figcaption>
@@ -76,7 +88,8 @@
         </div>
     </section>
     
-    <script src="scripts/cards.js"></script>   
+    <script src="scripts/cards.js"></script>
+    <script src="scripts/validate.js"></script>    
     <script src="scripts/script.js"></script>   
 </body>
 </html>

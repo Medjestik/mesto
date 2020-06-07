@@ -5,5 +5,8 @@
 @import url(../blocks/header/header.css);
 @import url(../blocks/profile/profile.css);
 @import url(../blocks/popup/popup.css);
+@import url(../blocks/popup/__input/_novalid/popup__input_novalid.css);
+@import url(../blocks/popup/__input-error/_active/popup__input-error_active.css);
+@import url(../blocks/popup/__submit-button/_disabled/popup__submit-button_disabled.css);
 @import url(../blocks/places/places.css);
 @import url(../blocks/footer/footer.css);
