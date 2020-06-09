@@ -6,10 +6,10 @@ function enableValidation(options) {
         const submitButton = formElement.querySelector(options.submitButtonSelector);
 
         inputElements.forEach (input => {
-            input.addEventListener('input', e => handleCheckInput(e, options.inputErrorClass, options.errorClass))
-        })
-        formElement.addEventListener('input', () => handleCheckSubmit(formElement, submitButton, options.inactiveButtonClass))
-    })
+            input.addEventListener('input', e => handleCheckInput(e, options.inputErrorClass, options.errorClass));
+        });
+        formElement.addEventListener('input', () => handleCheckSubmit(formElement, submitButton, options.inactiveButtonClass));
+    });
 }
 
 //Проверка для кнопки сабмита

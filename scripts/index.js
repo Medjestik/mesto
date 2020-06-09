@@ -56,7 +56,7 @@ function newCard(name, link) {
         evt.target.closest('.place__card').remove();
     });
     return cardEl;
-};
+}
 
 function renderCard(cont, el) {
     cont.prepend(el);
@@ -72,7 +72,7 @@ function openPopup(el) {
     el.addEventListener('click', closePopupByButton);
     el.addEventListener('mousedown', closePopupByOverlay);
     document.addEventListener('keydown', closePopupByEsc);
-};
+}
 
 function popupProfileOpened() {
     nameInput.value = profileName.textContent;
@@ -81,7 +81,7 @@ function popupProfileOpened() {
     hideInputError(jobInput, formValidationOptions.inputErrorClass, formValidationOptions.errorClass);
     handleCheckSubmit(formProfileElement, submitProfileButton, formValidationOptions.inactiveButtonClass);
     openPopup(popupProfile);
-};
+}
 
 function popupAddCardsOpened() {
     titleInput.value = "";
@@ -90,32 +90,32 @@ function popupAddCardsOpened() {
     hideInputError(linkInput, formValidationOptions.inputErrorClass, formValidationOptions.errorClass);
     handleCheckSubmit(formCardsElement, submitCardsButton, formValidationOptions.inactiveButtonClass);
     openPopup(popupCards);
-};
+}
 
 function formProfileHandler(evt) {
     evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
     profileName.textContent = nameInput.value;
     profileJob.textContent = jobInput.value;
-};
+}
 
 function formCardsHandler(evt) {
     evt.preventDefault();
     renderCard(cardContainer, newCard(titleInput.value, linkInput.value));
-};
+}
 
 function closePopupByButton(evt) {
     if (evt.target.classList.contains('popup__close-button') || evt.target.classList.contains('popup__submit-button') )  {
         const popupElement = evt.target.closest('.popup');
         popupElement.classList.remove('popup_opened');
     }
-};
+}
 
 function closePopupByEsc(evt) {
     const popupEl = popups.querySelector('.popup_opened');
     if (evt.key === "Escape" && popupEl !== null) {
         popupEl.classList.remove('popup_opened');
     }
-};
+}
 
 function closePopupByOverlay(evt) {
     if (!evt.target.closest('.container')) {
