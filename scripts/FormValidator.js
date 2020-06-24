@@ -2,7 +2,6 @@ export default class FormValidator {
     constructor (options, formElement) {
         this._formElement = formElement;
         this._inputSelector = options.inputSelector;
-        this._submitButtonSelector = options.submitButtonSelector;
         this._inactiveButtonClass = options.inactiveButtonClass;
         this._inputErrorClass = options.inputErrorClass;
         this._errorClass = options.errorClass;
@@ -48,7 +47,7 @@ export default class FormValidator {
 
     //Показать ошибки
     _showInputError(input, inputErrorClass, errorClass) {
-        const error = document.querySelector(`#${input.id}-error`);
+        const error = this._formElement.querySelector(`#${input.id}-error`);
         input.classList.add(inputErrorClass);
         error.classList.add(errorClass);
         error.textContent = input.validationMessage;
@@ -56,7 +55,7 @@ export default class FormValidator {
 
     //Скрыть ошибки
     _hideInputError(input, inputErrorClass, errorClass) {
-        const error = document.querySelector(`#${input.id}-error`);
+        const error = this._formElement.querySelector(`#${input.id}-error`);
         input.classList.remove(inputErrorClass);
         error.classList.remove(errorClass);
         error.textContent = '';

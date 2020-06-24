@@ -37,32 +37,38 @@ const formValidationOptions = {
     errorClass: 'popup__input-error_active'
 };
 
-initialCards.forEach((item) => {
-    const card = new Card(item.name, item.link, '.place__template');
-    const cardEl = card.generateCard();
-    cardContainer.prepend(cardEl);
-});
+//Валидация попапов
+const profileValidation = new FormValidator(formValidationOptions, formProfileElement);
+const cardsValidation = new FormValidator(formValidationOptions, formCardsElement);
 
-function openPopup(el) {
-    el.classList.add('popup_opened');
-}
+profileValidation.enableValidation();
+cardsValidation.enableValidation();
 
 function popupProfileOpened() {
     nameInput.value = profileName.textContent;
     jobInput.value = profileJob.textContent;
-    const validation = new FormValidator(formValidationOptions, formProfileElement);
-    validation.enableValidation();
-    validation.resetState();
+    profileValidation.resetState();
     openPopup(popupProfile);
 }
 
 function popupAddCardsOpened() {
     titleInput.value = "";
     linkInput.value = "";
-    const validation = new FormValidator(formValidationOptions, formCardsElement);
-    validation.enableValidation();
-    validation.resetState();
+    cardsValidation.resetState();
     openPopup(popupCards);
+}
+
+function addInitialCards() {
+    initialCards.forEach((item) => {
+        const card = new Card(item.name, item.link, '.place__template');
+        const cardEl = card.generateCard();
+        cardContainer.prepend(cardEl);
+    });
+}
+
+function openPopup(el) {
+    el.classList.add('popup_opened');
+    document.addEventListener('keydown', closePopupByEsc);
 }
 
 function formProfileHandler(evt) {
@@ -89,6 +95,7 @@ function closePopupByEsc(evt) {
     const popupEl = popups.querySelector('.popup_opened');
     if (evt.key === "Escape" && popupEl !== null) {
         popupEl.classList.remove('popup_opened');
+        document.removeEventListener('keydown', closePopupByEsc);
     }
 }
 
@@ -99,14 +106,19 @@ function closePopupByOverlay(evt) {
     }
 }
 
-popupsArray .forEach(popup => {
-    popup.addEventListener('click', closePopupByButton);
-    popup.addEventListener('mousedown', closePopupByOverlay);
-    document.addEventListener('keydown', closePopupByEsc);
-});
+function setPopupsListeners() {
+    popupsArray .forEach(popup => {
+        popup.addEventListener('click', closePopupByButton);
+        popup.addEventListener('mousedown', closePopupByOverlay);
+    });
+}
+
 
 //Слушатели
 formProfileElement.addEventListener('submit', formProfileHandler);
 formCardsElement.addEventListener('submit', formCardsHandler);
 editButton.addEventListener('click', popupProfileOpened);
 addButton.addEventListener('click', popupAddCardsOpened);
+
+addInitialCards();
+setPopupsListeners();

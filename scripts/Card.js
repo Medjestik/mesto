@@ -56,5 +56,13 @@ export default class Card {
         popup.classList.add('popup_opened');
         caption.textContent = this._name;
         image.src = this._link;
+        document.addEventListener('keydown', this._closePopupPhoto);
+    }
+
+    _closePopupPhoto(evt) {
+        if (evt.key === "Escape") {
+            popup.classList.remove('popup_opened');
+            document.removeEventListener('keydown', this._closePopupPhoto);
+        }
     }
 };
