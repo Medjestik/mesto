@@ -71,10 +71,16 @@ function openPopup(el) {
     document.addEventListener('keydown', closePopupByEsc);
 }
 
+function closePopup(el) {
+    el.classList.remove('popup_opened');
+    document.removeEventListener('keydown', closePopupByEsc);
+}
+
 function formProfileHandler(evt) {
     evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
     profileName.textContent = nameInput.value;
     profileJob.textContent = jobInput.value;
+    closePopup(popupProfile);
 }
 
 function formCardsHandler(evt) {
@@ -82,27 +88,27 @@ function formCardsHandler(evt) {
     const card = new Card(titleInput.value, linkInput.value, '.place__template');
     const cardEl = card.generateCard();
     cardContainer.prepend(cardEl);
+    closePopup(popupCards);
 }
 
 function closePopupByButton(evt) {
-    if (evt.target.classList.contains('popup__close-button') || evt.target.classList.contains('popup__submit-button') )  {
-        const popupElement = evt.target.closest('.popup');
-        popupElement.classList.remove('popup_opened');
+    if (evt.target.classList.contains('popup__close-button'))  {
+        const popupEl = evt.target.closest('.popup');
+        closePopup(popupEl);
     }
 }
 
 function closePopupByEsc(evt) {
     const popupEl = popups.querySelector('.popup_opened');
     if (evt.key === "Escape" && popupEl !== null) {
-        popupEl.classList.remove('popup_opened');
-        document.removeEventListener('keydown', closePopupByEsc);
+        closePopup(popupEl);
     }
 }
 
 function closePopupByOverlay(evt) {
     if (!evt.target.closest('.container')) {
         const popupEl = popups.querySelector('.popup_opened');
-        popupEl.classList.remove('popup_opened');
+        closePopup(popupEl);
     }
 }
 
