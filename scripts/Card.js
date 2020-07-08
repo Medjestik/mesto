@@ -3,10 +3,11 @@ const image = popup.querySelector('.popup__img');
 const caption = popup.querySelector('.popup__caption');
 
 export default class Card {
-    constructor (name, link, cardSelector) {
+    constructor (name, link, cardSelector, { handleCardClick }) {
         this._name = name;
         this._link = link;
         this._cardSelector = cardSelector;
+        this._handleCardClick = handleCardClick;
     }
 
     //Получаем разметку карточки
@@ -39,7 +40,7 @@ export default class Card {
             this._likeCard(this._likeButton);
         });
         this._element.querySelector('.place__img').addEventListener('click', () => {
-            this._openPopupPhoto();
+            this._handleCardClick();
         })
     }
 
@@ -50,19 +51,5 @@ export default class Card {
 
     _likeCard(likeButton) {
         likeButton.classList.toggle('place__like-button-active');
-    }
-
-    _openPopupPhoto() {
-        popup.classList.add('popup_opened');
-        caption.textContent = this._name;
-        image.src = this._link;
-        document.addEventListener('keydown', this._closePopupPhoto);
-    }
-
-    _closePopupPhoto(evt) {
-        if (evt.key === "Escape") {
-            popup.classList.remove('popup_opened');
-            document.removeEventListener('keydown', this._closePopupPhoto);
-        }
     }
 };
