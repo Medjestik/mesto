@@ -28,7 +28,7 @@
 
 ## Технологии, используемые в проекте
 
-HTML, CSS (Flex, Grid, BEM), JavaScript, ООП, WebPack
+HTML, CSS (Flex, Grid, BEM), JavaScript, ООП, WebPack.
 
 ## Ссылка на проект 
 [https://medjestik.github.io/mesto/index.html]
