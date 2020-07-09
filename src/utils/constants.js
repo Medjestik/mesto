@@ -25,11 +25,6 @@ export const initialCards = [
     }
 ];
 
-//Попапы
-export const popupProfileSelector = '.popup__profile';
-export const popupCardsSelector = '.popup__cards';
-export const popupPhotoSelector = '.popup__photo';
-
 //Кнопки
 export const editButton = document.querySelector('.profile__edit-button');
 export const addButton = document.querySelector('.profile__add-button');

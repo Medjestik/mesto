@@ -1,7 +1,3 @@
-const popup = document.querySelector('.popup__photo');
-const image = popup.querySelector('.popup__img');
-const caption = popup.querySelector('.popup__caption');
-
 export default class Card {
     constructor (name, link, cardSelector, { handleCardClick }) {
         this._name = name;
@@ -26,6 +22,7 @@ export default class Card {
         this._element = this._getTemplate();
         this._element.querySelector('.place__caption').textContent = this._name;
         this._element.querySelector('.place__img').src = this._link;
+        this._element.querySelector('.place__img').alt = this._name;
         this._setEventListeners();
 
         return this._element; 
@@ -40,7 +37,7 @@ export default class Card {
             this._likeCard(this._likeButton);
         });
         this._element.querySelector('.place__img').addEventListener('click', () => {
-            this._handleCardClick();
+            this._handleCardClick(this._name, this._link);
         })
     }
 

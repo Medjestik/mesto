@@ -1,15 +1,12 @@
-import './pages/index.css';
-import Card from './components/Card.js';
-import PopupWithImage from './components/PopupWithImage.js';
-import PopupWithForm from './components/PopupWIthForm.js';
-import UserInfo from './components/UserInfo.js';
-import FormValidator from './components/FormValidator.js';
-import Section from './components/Section.js';
+import './index.css';
+import Card from '../components/Card.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import PopupWithForm from '../components/PopupWIthForm.js';
+import UserInfo from '../components/UserInfo.js';
+import FormValidator from '../components/FormValidator.js';
+import Section from '../components/Section.js';
 import {
     initialCards,
-    popupProfileSelector,
-    popupCardsSelector,
-    popupPhotoSelector,
     data,
     editButton,
     addButton,
@@ -21,7 +18,7 @@ import {
     linkInput,
     cardContainer,
     formValidationOptions
-} from './utils/constants.js';
+} from '../utils/constants.js';
 
 //Экземпляр класса валидации
 const profileValidation = new FormValidator(formValidationOptions, formProfileElement);
@@ -49,14 +46,14 @@ const cardsList = new Section ({
 }, cardContainer);
 
 //Создание экземпляра класса попапа с картинкой
-const popupPhoto = new PopupWithImage(popupPhotoSelector);
+const popupPhoto = new PopupWithImage('.popup__photo', '.popup__caption', '.popup__img');
 popupPhoto.setEventListeners();//добавление слушателей для попапа
 
 //Создание экземпляра класса попапа добавления фото
-const popupAddCard = new PopupWithForm(popupCardsSelector, { handleFormSubmit() {//обработчик сабмита формы
+const popupAddCard = new PopupWithForm('.popup__cards', { handleFormSubmit() {//обработчик сабмита формы
     const card = new Card(titleInput.value, linkInput.value, '.place__template',  { 
-        handleCardClick: () => {//обработчик собития клика на фото
-            popupPhoto.openPopup(name.value, link.value);
+        handleCardClick: (name, link) => {//обработчик собития клика на фото
+            popupPhoto.openPopup(name, link);
         }
     });
     const cardEl = card.generateCard();
@@ -72,7 +69,7 @@ addButton.addEventListener('click', () => {//добавление слушате
 });
 
 //Создание экземпляра класса попапа редактирования профиля
-const popupProfile = new PopupWithForm(popupProfileSelector, { handleFormSubmit() {
+const popupProfile = new PopupWithForm('.popup__profile', { handleFormSubmit() {
     popupProfile.closePopup();
     userInfo.setUserInfo(nameInput.value, jobInput.value);
 }})
@@ -82,7 +79,7 @@ editButton.addEventListener('click', () => {
     popupProfile.openPopup();
     nameInput.value = userInfo.getUserInfo().name;
     jobInput.value = userInfo.getUserInfo().job;
-    
+    profileValidation.resetState();
 });
 
 cardsList.renderItems();
