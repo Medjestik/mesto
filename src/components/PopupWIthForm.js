@@ -30,4 +30,12 @@ export default class PopupWithForm extends Popup {
             this._popup.querySelector('.popup__container').reset();//обнулили форму
         }
     }
+
+    renderLoading(isLoading) {
+        if (isLoading) {
+            this._popup.querySelector('.popup__submit-button').textContent = 'Сохранение..';
+        } else {
+            this._popup.querySelector('.popup__submit-button').textContent = 'Сохранить';
+        }
+    }
  }
