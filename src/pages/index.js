@@ -41,80 +41,81 @@ const api = new Api(config);
 //Экземпляр класса информации о пользователе
 const userInfo = new UserInfo(selectorsUserInfo);
 
+function makeCard (userId, data) {
+    const card = new Card(data, userId, '.place__template',  { 
+        handleCardClick: () => {//обработчик собития клика на фото
+            popupPhoto.openPopup(data.name, data.link);
+            }
+        }, { handleDeleteCard: () => {//обработчик собития клика на иконку удаления
+            popupDeleteCard.openPopup();
+            popupDeleteCard.setHandleSubmit(function() {
+                api.deleteCard(data._id)
+                .then(() => {
+                    card.removeCard();
+                    popupDeleteCard.closePopup();
+                })
+                .catch(() => {
+                    console.log('_handleResponseError');
+                })
+            });
+            }
+        }, { handlePutLike: (likeButton, numberOfLikes) => {
+            api.putLike(data._id)
+            .then((res) => {
+                likeButton.classList.add('place__like-button-active');
+                numberOfLikes.textContent = res.likes.length;
+            })
+            .catch(() => {
+                console.log('_handleResponseError');
+            })
+            }
+        }, { handleRemoveLike: (likeButton, numberOfLikes) => {
+            api.removeLike(data._id)
+            .then((res) => {
+                likeButton.classList.remove('place__like-button-active');
+                numberOfLikes.textContent = res.likes.length;
+            })
+            .catch(() => {
+                console.log('_handleResponseError');
+            })
+            } 
+        });
+
+    return card;
+}
+
 //Загрузка информации о пользователе с сервера
 Promise.all([api.getUserInfo(), api.getInitialCards()])
 .then((data) => {
     userInfo.setUserInfo(data[0]);
     userInfo.setAvatar(data[0].avatar)
-
     const userId = data[0]._id;
 
     //Отрисовка карточек с сервера
     const cardsList = new Section ({
         items: data[1],
         renderer: (item) => {
-            const card = new Card(item, userId, '.place__template', { 
-                handleCardClick: () => {//обработчик события клика на фото
-                    popupPhoto.openPopup(item.name, item.link);
-            }
-        }, { handleDeleteCard: () => {//обработчик события клика на иконку удаления
-                popupDeleteCard.openPopup();
-                popupDeleteCard.setHandleSubmit(function(){
-                    api.deleteCard(item._id);
-                    card.removeCard();
-                    popupDeleteCard.closePopup();
-                });
-            }
-        }, { handlePutLike: () => {//обработчик события клика на иконку лайка
-            api.putLike(item._id);
-            }
-        }, { handleRemoveLike: () => {//обработчик события клика на иконку лайка
-            api.removeLike(item._id);
-        } 
-    });
-        const cardEl = card.generateCard();
-        cardsList.addItem(cardEl);
+            const cardEl = makeCard(userId, item).generateCard();
+            cardsList.addItem(cardEl);
         }
     }, cardContainer);
 
-    cardsList.renderItems();
+    cardsList.renderItems();//Не совсем как это реализовать
 
     //Создание экземпляра класса попапа добавления фото
     const popupAddCard = new PopupWithForm('.popup__cards', { handleFormSubmit() {//обработчик сабмита формы
         popupAddCard.renderLoading(true);
         api.addCard(titleInput.value, linkInput.value)
         .then((data) => {
-            const card = new Card(data, userId, '.place__template',  
-            { 
-                handleCardClick: (name, link) => {//обработчик собития клика на фото
-                    popupPhoto.openPopup(name, link);
-                }
-            }, { handleDeleteCard: () => {//обработчик собития клика на иконку удаления
-                popupDeleteCard.openPopup();
-                popupDeleteCard.setHandleSubmit(function() {
-                    api.deleteCard(data._id);
-                    card.removeCard();
-                    popupDeleteCard.closePopup();
-                });
-            }
-            }, { handlePutLike: () => {
-                api.putLike(data._id);
-                }
-            }, { handleRemoveLike: () => {
-                api.removeLike(data._id);
-                } 
-            });
-            const cardEl = card.generateCard();
+            const cardEl = makeCard(userId, data).generateCard();
             cardsList.addItem(cardEl);
             popupAddCard.closePopup();
-            })
-        .catch((err) => {
+        })
+        .catch(() => {
             console.log('_handleResponseError');
-            return Promise.reject(err.message);
         })
         .finally(() => {
             popupAddCard.renderLoading(false);
-            popupAddCard.closePopup();
         })
         }
     })
@@ -125,11 +126,9 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
         cardsValidation.resetState();//обнулили состояние кнопки сабмита
     });
 })
-.catch((err) => {
+.catch(() => {
     console.log('_handleResponseError');
-    return Promise.reject(err.message);
 })
-
 
 //Создание экземпляра класса попапа удаления карточки
 const popupDeleteCard = new PopupDeleteCard('.popup__delete-card');
@@ -145,17 +144,14 @@ const popupProfile = new PopupWithForm('.popup__profile', { handleFormSubmit() {
     api.editUserInfo(nameInput.value, jobInput.value)
     .then((data => {
         userInfo.setUserInfo({name: data.name, about: data.about});
+        popupProfile.closePopup();
     }))
-    .catch((err) => {
+    .catch(() => {
         console.log('_handleResponseError');
-        return Promise.reject(err.message);
     })
     .finally(() => {
         popupProfile.renderLoading(false);
-        popupProfile.closePopup();
     })
-    
-    popupProfile.closePopup();
 }})
 popupProfile.setEventListeners();//добавление слушателей для попапа
 
@@ -171,16 +167,14 @@ const popupAvatar = new PopupWithForm('.popup__change-avatar', { handleFormSubmi
     api.changeAvatar(data.link)
     .then((data => {
         userInfo.setAvatar(data.avatar);
+        popupAvatar.closePopup();
     }))
-    .catch((err) => {
+    .catch(() => {
         console.log('_handleResponseError');
-        return Promise.reject(err.message);
     })
     .finally(() => {
         popupAvatar.renderLoading(false);
-        popupAvatar.closePopup();
     })
-    
 }})
 popupAvatar.setEventListeners();
 
