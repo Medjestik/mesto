@@ -6,13 +6,14 @@ export const avatarButton = document.querySelector('.profile__avatar-overlay');
 // Формы
 export const formProfileElement = document.querySelector('.popup__container_type_profile');
 export const formCardsElement = document.querySelector('.popup__container_type_cards');
-export const formDeleteCardElement = document.querySelector('.popup__container_type_delete-card');
+export const formDeleteCardElement = document.querySelector('.popup__container_type_change-avatar');
 
 // Поля
 export const nameInput = document.querySelector('.popup__input_type_name');
 export const jobInput = document.querySelector('.popup__input_type_job');
 export const titleInput = document.querySelector('.popup__input_type_title');
 export const linkInput = document.querySelector('.popup__input_type_link');
+export const avatarInput = document.querySelector('.popup__input_type_avatar');
 
 export const selectorsUserInfo = {
     name: '.profile__title',

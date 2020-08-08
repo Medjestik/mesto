@@ -59,21 +59,19 @@ function makeCard (userId, data) {
                 })
             });
             }
-        }, { handlePutLike: (likeButton, numberOfLikes) => {
+        }, { handlePutLike: () => {
             api.putLike(data._id)
             .then((res) => {
-                likeButton.classList.add('place__like-button-active');
-                numberOfLikes.textContent = res.likes.length;
+                card.countLikes(res);
             })
             .catch(() => {
                 console.log('_handleResponseError');
             })
             }
-        }, { handleRemoveLike: (likeButton, numberOfLikes) => {
+        }, { handleRemoveLike: () => {
             api.removeLike(data._id)
             .then((res) => {
-                likeButton.classList.remove('place__like-button-active');
-                numberOfLikes.textContent = res.likes.length;
+                card.countLikes(res);
             })
             .catch(() => {
                 console.log('_handleResponseError');
@@ -87,27 +85,26 @@ function makeCard (userId, data) {
 //Загрузка информации о пользователе с сервера
 Promise.all([api.getUserInfo(), api.getInitialCards()])
 .then((data) => {
-    userInfo.setUserInfo(data[0]);
-    userInfo.setAvatar(data[0].avatar)
-    const userId = data[0]._id;
-
+    const [UserData, initialCards] = data;
+    userInfo.setUserInfo(UserData);
+    userInfo.setAvatar(UserData.avatar);
+    
     //Отрисовка карточек с сервера
     const cardsList = new Section ({
-        items: data[1],
         renderer: (item) => {
-            const cardEl = makeCard(userId, item).generateCard();
+            const cardEl = makeCard(UserData._id, item).generateCard();
             cardsList.addItem(cardEl);
         }
     }, cardContainer);
 
-    cardsList.renderItems();//Не совсем как это реализовать
+    cardsList.renderItems(initialCards);
 
     //Создание экземпляра класса попапа добавления фото
     const popupAddCard = new PopupWithForm('.popup__cards', { handleFormSubmit() {//обработчик сабмита формы
         popupAddCard.renderLoading(true);
         api.addCard(titleInput.value, linkInput.value)
         .then((data) => {
-            const cardEl = makeCard(userId, data).generateCard();
+            const cardEl = makeCard(UserData._id, data).generateCard();
             cardsList.addItem(cardEl);
             popupAddCard.closePopup();
         })

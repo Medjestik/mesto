@@ -20,7 +20,7 @@ export default class Card {
         .content 
         .querySelector('.card') 
         .cloneNode(true); 
- 
+        
         return cardElement; 
     } 
 
@@ -65,12 +65,22 @@ export default class Card {
     }
 
     _likeCard() {
-        const likeButton = this._element.querySelector('.place__like-button');
-        const numberOfLikes = this._element.querySelector('.place__like-count');
-        if (likeButton.classList.contains('place__like-button-active')) {
-            this._handleRemoveLike(likeButton, numberOfLikes);
+        if (this._element.querySelector('.place__like-button').classList.contains('place__like-button-active')) {
+            this._handleRemoveLike();
         } else {
-            this._handlePutLike(likeButton, numberOfLikes);
+            this._handlePutLike();
+        }
+    }
+
+    countLikes(res) {
+        const likeButton = this._element.querySelector('.place__like-button');
+        const countLikes = this._element.querySelector('.place__like-count');
+        if (likeButton.classList.contains('place__like-button-active')) {
+            countLikes.textContent = res.likes.length;
+            likeButton.classList.remove('place__like-button-active');
+        } else {
+            countLikes.textContent = res.likes.length;
+            likeButton.classList.add('place__like-button-active');
         }
     }
 };
